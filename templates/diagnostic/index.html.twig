@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Diagnostic de stress - CESIZen{% endblock %}
+
+{% block body %}
+<h1>Diagnostic de stress - Holmes et Rahe</h1>
+<p>Cochez les événements que vous avez vécus au cours des 12 derniers mois :</p>
+
+<form action="{{ path('app_diagnostic_resultat') }}" method="POST" data-turbo="false">
+    {% for question in questionnaire.questions %}
+    <div>
+        <label>
+            <input type="checkbox" name="questions[]" value="{{ question.id }}">
+            {{ question.texte }} ({{ question.poids }} pts)
+        </label>
+    </div>
+    {% endfor %}
+
+    <button type="submit">Calculer mon score</button>
+</form>
+
+{% endblock %}

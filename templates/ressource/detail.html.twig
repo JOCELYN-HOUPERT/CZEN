@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ressource.titre }} - CESIZen{% endblock %}
+
+{% block body %}
+<a href="{{ path('app_ressources') }}">← Retour aux ressources</a>
+
+<h1>{{ ressource.titre }}</h1>
+<p>{{ ressource.contenu }}</p>
+<small>Publié le {{ ressource.createdAt|date('d/m/Y') }}</small>
+
+{% if is_granted('ROLE_USER') %}
+    {% if app.user.favoris.contains(ressource) %}
+        <a href="{{ path('app_favori_retirer', {id: ressource.id}) }}">❤️ Retirer des favoris</a>
+    {% else %}
+        <a href="{{ path('app_favori_ajouter', {id: ressource.id}) }}">🤍 Ajouter aux favoris</a>
+    {% endif %}
+{% else %}
+    <p><a href="{{ path('app_login') }}">Connectez-vous</a> pour sauvegarder cette ressource</p>
+{% endif %}
+
+{% endblock %}

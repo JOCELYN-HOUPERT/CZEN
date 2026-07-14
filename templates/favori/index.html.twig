@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Favoris - CESIZen{% endblock %}
+
+{% block body %}
+<h1>Mes Favoris</h1>
+
+{% if favoris is empty %}
+    <p>Vous n'avez pas encore de favoris.</p>
+    <a href="{{ path('app_ressources') }}">Découvrir les ressources</a>
+{% else %}
+    {% for ressource in favoris %}
+        <div>
+            <h2>{{ ressource.titre }}</h2>
+            <p>{{ ressource.contenu|slice(0, 150) }}...</p>
+            <a href="{{ path('app_ressource_detail', {id: ressource.id}) }}">Lire la suite</a>
+            <a href="{{ path('app_favori_retirer', {id: ressource.id}) }}">❤️ Retirer</a>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

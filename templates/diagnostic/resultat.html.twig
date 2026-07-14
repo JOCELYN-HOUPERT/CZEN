@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat du diagnostic - CESIZen{% endblock %}
+
+{% block body %}
+<h1>Résultat de votre diagnostic</h1>
+
+<h2>Votre score : {{ score }} points</h2>
+<h3>Niveau : {{ niveau }}</h3>
+<p>{{ message }}</p>
+
+{% if not is_granted('ROLE_USER') %}
+    <p>
+        <a href="{{ path('app_register') }}">Créez un compte</a>
+        pour sauvegarder vos résultats et suivre votre évolution !
+    </p>
+{% else %}
+    <p>✅ Votre résultat a été sauvegardé dans votre historique.</p>
+{% endif %}
+
+<a href="{{ path('app_diagnostic') }}">Refaire le diagnostic</a>
+<a href="{{ path('app_ressources') }}">Voir les ressources</a>
+
+{% endblock %}

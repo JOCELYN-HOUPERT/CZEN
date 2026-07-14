@@ -1,0 +1,49 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+<h1>Tableau de bord CESIZen</h1>
+
+<div style="display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap;">
+    <div style="background: #4A90D9; color: white; padding: 24px; border-radius: 12px; flex: 1; min-width: 150px; text-align: center;">
+        <div style="font-size: 48px; font-weight: bold;">{{ nbUtilisateurs }}</div>
+        <div>Utilisateurs</div>
+    </div>
+    <div style="background: #6DBF9E; color: white; padding: 24px; border-radius: 12px; flex: 1; min-width: 150px; text-align: center;">
+        <div style="font-size: 48px; font-weight: bold;">{{ nbDiagnostics }}</div>
+        <div>Diagnostics réalisés</div>
+    </div>
+    <div style="background: #4A4A4A; color: white; padding: 24px; border-radius: 12px; flex: 1; min-width: 150px; text-align: center;">
+        <div style="font-size: 48px; font-weight: bold;">{{ nbRessources }}</div>
+        <div>Ressources publiées</div>
+    </div>
+    <div style="background: #E57373; color: white; padding: 24px; border-radius: 12px; flex: 1; min-width: 150px; text-align: center;">
+        <div style="font-size: 48px; font-weight: bold;">{{ moyenneScore }}</div>
+        <div>Score moyen</div>
+    </div>
+</div>
+
+<h2>Distribution des niveaux de stress</h2>
+<p style="color: grey; font-size: 14px;">Données anonymisées — conformes RGPD</p>
+
+<canvas id="stressChart" style="max-width: 500px;"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('stressChart');
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Faible (< 150)', 'Modéré (150-300)', 'Élevé (> 300)'],
+        datasets: [{
+            data: [{{ faible }}, {{ modere }}, {{ eleve }}],
+            backgroundColor: ['#6DBF9E', '#F0A500', '#E57373'],
+        }]
+    },
+    options: {
+        plugins: {
+            legend: { position: 'bottom' }
+        }
+    }
+});
+</script>
+{% endblock %}

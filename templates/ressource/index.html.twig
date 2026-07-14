@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ressources - CESIZen{% endblock %}
+
+{% block body %}
+<h1>Nos Ressources</h1>
+
+{% for ressource in ressources %}
+    <div>
+        <h2>{{ ressource.titre }}</h2>
+        <p>{{ ressource.contenu|slice(0, 150) }}...</p>
+        <a href="{{ path('app_ressource_detail', {id: ressource.id}) }}">Lire la suite</a>
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil - CESIZen{% endblock %}
+
+{% block body %}
+<h1>Mon Profil</h1>
+
+<p><strong>Nom :</strong> {{ user.nom }}</p>
+<p><strong>Email :</strong> {{ user.email }}</p>
+<p><strong>Membre depuis :</strong> {{ user.createdAt|date('d/m/Y') }}</p>
+
+<h2>Mes liens</h2>
+<a href="{{ path('app_favoris') }}">❤️ Mes favoris</a>
+<a href="{{ path('app_diagnostic') }}">📋 Faire le diagnostic</a>
+
+<h2>Supprimer mon compte</h2>
+<p>⚠️ Cette action est irréversible. Toutes vos données seront supprimées.</p>
+
+<form method="POST" action="{{ path('app_profil_supprimer') }}"
+      onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?')">
+    <input type="hidden" name="_token" value="{{ csrf_token('supprimer_compte') }}">
+    <button type="submit">Supprimer mon compte</button>
+</form>
+
+{% endblock %}

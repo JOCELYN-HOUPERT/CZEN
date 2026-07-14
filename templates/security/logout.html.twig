@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Déconnexion - CESIZen{% endblock %}
+
+{% block body %}
+<div style="text-align: center; margin-top: 100px;">
+    <h1>À bientôt ! 👋</h1>
+    <p>Vous avez été déconnecté avec succès.</p>
+    <a href="{{ path('app_login') }}">Se reconnecter</a>
+    &nbsp;|&nbsp;
+    <a href="{{ path('app_home') }}">Retour à l'accueil</a>
+</div>
+{% endblock %}
